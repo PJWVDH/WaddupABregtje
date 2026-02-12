@@ -2,61 +2,403 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <title>Valentijn?</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Breggielaaaand, wil je mijn Valentijn zijn? </title>
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      background: pink;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #ffd1dc 0%, #ffb6c1 50%, #ff69b4 100%);
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      margin: 0;
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
     }
+
+    /* Zwevende bloemen achtergrond */
+    .flower {
+      position: absolute;
+      font-size: 2rem;
+      opacity: 0.6;
+      animation: float 15s infinite ease-in-out;
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-30px) rotate(180deg);
+      }
+    }
+
+    /* Hartjes confetti */
+    .heart {
+      position: absolute;
+      font-size: 1.5rem;
+      opacity: 0;
+      animation: fall 8s infinite ease-in;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      0% {
+        opacity: 0;
+        transform: translateY(-100px) rotate(0deg);
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(100vh) rotate(360deg);
+      }
+    }
+
+    /* Kaart container */
     .card {
       background: white;
-      padding: 30px;
-      border-radius: 20px;
+      padding: 50px 60px;
+      border-radius: 30px;
       text-align: center;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      box-shadow: 0 20px 60px rgba(255, 105, 180, 0.4);
+      position: relative;
+      z-index: 10;
+      animation: cardPulse 2s infinite ease-in-out;
+      max-width: 90%;
     }
+
+    @keyframes cardPulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.02);
+      }
+    }
+
+    h1 {
+      color: #ff1493;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.3);
+      animation: titleBounce 1s ease-in-out;
+    }
+
+    @keyframes titleBounce {
+      0% {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      60% {
+        transform: translateY(10px);
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .flower-decoration {
+      font-size: 3rem;
+      margin: 20px 0;
+      animation: spin 3s linear infinite;
+      display: inline-block;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .button-container {
+      margin: 30px 0;
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
     button {
-      font-size: 18px;
-      padding: 10px 20px;
-      margin: 10px;
+      font-size: 1.5rem;
+      padding: 15px 40px;
       border: none;
-      border-radius: 10px;
+      border-radius: 50px;
       cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: bold;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      position: relative;
+      overflow: hidden;
     }
+
+    button::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    button:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
     #yes {
-      background: #ff4d6d;
+      background: linear-gradient(135deg, #ff4d6d 0%, #ff1493 100%);
       color: white;
+      animation: wobble 1s ease-in-out infinite;
     }
+
+    @keyframes wobble {
+      0%, 100% {
+        transform: rotate(0deg);
+      }
+      25% {
+        transform: rotate(-5deg);
+      }
+      75% {
+        transform: rotate(5deg);
+      }
+    }
+
+    #yes:hover {
+      transform: scale(1.2);
+      box-shadow: 0 10px 30px rgba(255, 77, 109, 0.6);
+    }
+
     #no {
-      background: #ccc;
+      background: linear-gradient(135deg, #e0e0e0 0%, #bdbdbd 100%);
+      color: #666;
+    }
+
+    #no:hover {
+      transform: scale(0.95);
+      background: linear-gradient(135deg, #d0d0d0 0%, #aaa 100%);
+    }
+
+    #result {
+      margin-top: 30px;
+      font-size: 1.8rem;
+      color: #ff1493;
+      font-weight: bold;
+      min-height: 60px;
+      animation: fadeIn 1s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .celebration {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    .confetti-piece {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #ff69b4;
+      opacity: 0;
+    }
+
+    @keyframes confettiFall {
+      0% {
+        opacity: 1;
+        transform: translateY(0) rotateZ(0deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(100vh) rotateZ(720deg);
+      }
+    }
+
+    .sparkle {
+      position: absolute;
+      font-size: 2rem;
+      animation: sparkle 1.5s ease-in-out infinite;
+    }
+
+    @keyframes sparkle {
+      0%, 100% {
+        opacity: 0;
+        transform: scale(0);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Zwevende bloemen -->
+  <div id="flowers-container"></div>
+  
+  <!-- Vallende hartjes -->
+  <div id="hearts-container"></div>
 
-<div class="card">
-  <h1>Wil je mijn Valentijn zijn? 💘</h1>
-  <button id="yes" onclick="yesClicked()">Ja 💖</button>
-  <button id="no" onclick="noClicked()">Nee 😢</button>
-  <p id="result"></p>
-</div>
+  <!-- Hoofdkaart -->
+  <div class="card">
+    <div class="flower-decoration">🌸🌹🌺</div>
+    <h1>Breggieland, wil je mijn Valentijn zijn? :):)</h1>
+    <div class="flower-decoration">🌷💐🌼</div>
+    
+    <div class="button-container">
+      <button id="yes">Ja! Wooop Wooop</button>
+      <button id="no">Nee 😢</button>
+    </div>
+    
+    <p id="result"></p>
+  </div>
 
-<script>
-  function yesClicked() {
-    document.getElementById("result").innerHTML =
-      "YES!! 💕 Ik kan niet wachten om samen Valentijn te vieren 🥰";
-  }
+  <!-- Confetti container -->
+  <div class="celebration" id="celebration"></div>
 
-  function noClicked() {
-    document.getElementById("result").innerHTML =
-      "Oh 😢 maar ik vind je alsnog geweldig 💌";
-  }
-</script>
+  <script>
+    // Creëer zwevende bloemen
+    const flowersContainer = document.getElementById('flowers-container');
+    const flowerTypes = ['🌸', '🌹', '🌺', '🌷', '🌼', '💐', '🌻', '🏵️'];
+    
+    for (let i = 0; i < 15; i++) {
+      const flower = document.createElement('div');
+      flower.className = 'flower';
+      flower.textContent = flowerTypes[Math.floor(Math.random() * flowerTypes.length)];
+      flower.style.left = Math.random() * 100 + '%';
+      flower.style.top = Math.random() * 100 + '%';
+      flower.style.animationDelay = Math.random() * 5 + 's';
+      flower.style.animationDuration = (Math.random() * 10 + 10) + 's';
+      flowersContainer.appendChild(flower);
+    }
 
+    // Creëer vallende hartjes
+    const heartsContainer = document.getElementById('hearts-container');
+    const heartTypes = ['💕', '💖', '💗', '💓', '💝', '❤️', '💘'];
+    
+    setInterval(() => {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.textContent = heartTypes[Math.floor(Math.random() * heartTypes.length)];
+      heart.style.left = Math.random() * 100 + '%';
+      heart.style.animationDuration = (Math.random() * 3 + 5) + 's';
+      heartsContainer.appendChild(heart);
+      
+      setTimeout(() => heart.remove(), 8000);
+    }, 800);
+
+    // Ja button click
+    document.getElementById('yes').onclick = function() {
+      const result = document.getElementById('result');
+      result.innerHTML = "YESSS!! 💕🎉<br> LETS GOOOOOOOOOOOOOO! 🥰🌹";
+      result.style.animation = 'none';
+      setTimeout(() => result.style.animation = 'fadeIn 1s ease-in', 10);
+      
+      // Confetti explosie!
+      createConfetti();
+      
+      // Extra hartjes
+      for (let i = 0; i < 20; i++) {
+        setTimeout(() => {
+          const heart = document.createElement('div');
+          heart.className = 'heart';
+          heart.textContent = '💖';
+          heart.style.left = Math.random() * 100 + '%';
+          heart.style.fontSize = (Math.random() * 2 + 1) + 'rem';
+          heartsContainer.appendChild(heart);
+          setTimeout(() => heart.remove(), 8000);
+        }, i * 100);
+      }
+    };
+
+    // Nee button click
+    document.getElementById('no').onclick = function() {
+      const result = document.getElementById('result');
+      result.innerHTML = "Oh... 😢<br> Jij vieze vuile tering hoer waarom klik je nee :(";
+      result.style.animation = 'none';
+      setTimeout(() => result.style.animation = 'fadeIn 1s ease-in', 10);
+      
+      // Troost bloemen
+      for (let i = 0; i < 10; i++) {
+        setTimeout(() => {
+          const flower = document.createElement('div');
+          flower.className = 'heart';
+          flower.textContent = '🌹';
+          flower.style.left = Math.random() * 100 + '%';
+          flower.style.fontSize = (Math.random() * 2 + 1) + 'rem';
+          heartsContainer.appendChild(flower);
+          setTimeout(() => flower.remove(), 8000);
+        }, i * 150);
+      }
+    };
+
+    // Confetti functie
+    function createConfetti() {
+      const celebration = document.getElementById('celebration');
+      const colors = ['#ff69b4', '#ff1493', '#ffc0cb', '#ff4d6d', '#ffb6c1'];
+      
+      for (let i = 0; i < 100; i++) {
+        setTimeout(() => {
+          const confetti = document.createElement('div');
+          confetti.className = 'confetti-piece';
+          confetti.style.left = Math.random() * 100 + '%';
+          confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+          confetti.style.animation = `confettiFall ${Math.random() * 3 + 2}s linear`;
+          celebration.appendChild(confetti);
+          
+          setTimeout(() => confetti.remove(), 5000);
+        }, i * 30);
+      }
+    }
+
+    // Sparkles bij hover over de kaart
+    const card = document.querySelector('.card');
+    card.addEventListener('mouseenter', () => {
+      for (let i = 0; i < 5; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        sparkle.textContent = '✨';
+        sparkle.style.left = Math.random() * 100 + '%';
+        sparkle.style.top = Math.random() * 100 + '%';
+        sparkle.style.animationDelay = (Math.random() * 0.5) + 's';
+        card.appendChild(sparkle);
+        
+        setTimeout(() => sparkle.remove(), 1500);
+      }
+    });
+  </script>
 </body>
 </html>
