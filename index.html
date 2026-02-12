@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <title>Valentijn?</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: pink;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+    button {
+      font-size: 18px;
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    #yes {
+      background: #ff4d6d;
+      color: white;
+    }
+    #no {
+      background: #ccc;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h1>Wil je mijn Valentijn zijn? 💘</h1>
+  <button id="yes" onclick="yesClicked()">Ja 💖</button>
+  <button id="no" onclick="noClicked()">Nee 😢</button>
+  <p id="result"></p>
+</div>
+
+<script>
+  function yesClicked() {
+    document.getElementById("result").innerHTML =
+      "YES!! 💕 Ik kan niet wachten om samen Valentijn te vieren 🥰";
+  }
+
+  function noClicked() {
+    document.getElementById("result").innerHTML =
+      "Oh 😢 maar ik vind je alsnog geweldig 💌";
+  }
+</script>
+
+</body>
+</html>
